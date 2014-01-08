@@ -4,40 +4,75 @@
 
 
 (function () {
-    var divMask = '<div  id="_mask" ' +
-        'style="display: none;  position: absolute;   top: 0;  left: 0;  width: 100%;  background-color: black;  z-index:101;  -moz-opacity: 0.2;  opacity:.20;  filter: alpha(opacity=20);"' +
-        ' ></div>' +
-        '<div id="_loadFrom" style="z-index: 1000;  display: none; color:Black; background-color:White;position: absolute;height:60px; left: 40%; top: 40%; width:340px; height: auto;">' +
-        '<div id="_loadImg">' +
-        '<div style=" font-size:14px;margin:20px 0 10px 10px;float:left; width:260px;"><h3>>系统工具</h3><br /><ul  id="_jsTools"><li>关于我们</li></ul>' +
-        '</div> </div></div>';		
-	document.open();
-        document.write(divMask);
-	  document.close()
+    var h = document;
+    var e =  {};
+    // e._URL = "http://localhost/ubtcheck/";
+    e._URL = "http://cdataportal.sh.ctripcorp.com/fx/ubtcheck/";
+    e._CSS = '<link rel="stylesheet" type="text/css" href="' + e._URL + 'misc/common.css?v=1.0.3" media="all" />';
+    e.getElem = function(a) {
+        return document.getElementById(a)
+    };
+    e.getValue = function(a) {
+        return (a = e.getElem(a)) && a.value || ""
+    };
+    e.on = function() {
+        return (h.addEventListener ?
+            function(a, b, c, k) {
+                a.addEventListener(b, c, k || !1)
+            } : (h.attachEvent ? function(a, b, c) {
+            a.attachEvent("on" + b, c)
+        }:null));
+    }();
+
     var MaskTool = function () {
-        var maskObj = document.getElementById("_mask");
-        var loadFrom = document.getElementById("_loadFrom");
-        var jsTools = document.getElementById("_jsTools");
         var _that = this;
-        this.pageScroll = function () {
-            loadFrom.style.top = (document.documentElement.scrollTop +
-                (document.documentElement.clientHeight - maskObj.offsetHeight) / 2 - 40) + "px";
-            loadFrom.style.left = (document.documentElement.scrollLeft +
-                (document.documentElement.clientWidth - maskObj.offsetWidth) / 2 - 100) + "px";
-        };
-        this.show = function () {
-            _that.pageScroll();
-            var b = document.documentElement.clientHeight ? document.documentElement : document.body;
-            maskObj.style.height = (b.scrollHeight > b.clientHeight ? b.scrollHeight : b.clientHeight)+"px";
-            maskObj.style.display= "";
-            loadFrom.style.display = "";
+        this._createToolbar = function () {
+            var a = h.createElement("iframe");
+            a.src = "about:blank";
+            a.width = 120;
+            a.height = 170;
+            a.scrolling = "no";
+            a.allowtransparency = !0;
+            h.body.appendChild(a);
+            a.style.cssText = "position:fixed;_position:absolute;bottom:120px;left:0;z-index:10001;border:0";
+            var b = a.contentWindow.document,
+                c;
+            c = "<!DOCTYPE html><html><head>" + e._CSS;
+            c += '</head><body><ul class="sidebar">';
+            c += '<li><a href="javascript:;" id="_checkUBTScript"><i class="icon icon-tasks"></i> \u811a\u672c\u68c0\u6d4b</a></li>';
+            c += '<li><a href="javascript:;" id="_tracelogSearch"><i class="icon icon-search"></i> Tracklog\u67e5\u8be2</a></li>';
+            c += '<li><a href="javascript:;" id="_performanceData"><i class="icon icon-time"></i> \u6027\u80fd\u6570\u636e</a></li>';
+            c += '<li><a href="' + e._URL + 'doc.html" target="_blank"><i class="icon icon-book"></i> UBT\u6587\u6863</a></li>';
+            c += '<li><a href="javascript:;" id="_close"><i class="icon icon-off"></i> \u5173\u95ed\u5de5\u5177</a></li>';
+            c += "</ul>";
+            c += "</body></html>";
+            b.open();
+            b.write(c);
+            b.close();
+            var k = this;
+            e.on(b.body, "click", function(a) {
+                a = a || f.event;
+                a = a.target || a.srcElement;
+                if ("a" == a.nodeName.toLowerCase() && (a = a.id && a.id.substring(1), _that[a])) _that[a]()
+            });
+            e.on(b.body, "keyup", function(a) {
+                a = a || f.event;
+                27 == a.keyCode && _that.hide()
+            });
+            e.on(f, "keyup", function(a) {
+                a = a || f.event;
+                27 == a.keyCode && _that.hide()
+            });
+            this.sidebar = a
 
         };
         this.hide = function () {
-            _that.pageScroll();
-            maskObj.style.display = "none";
-            loadFrom.style.display = "none";
+            this.dialog.style.display = "none"
         };
+        this.close = function() {
+            f.confirm("\u786e\u5b9a\u8981\u5173\u95edUBT\u68c0\u6d4b\u5de5\u5177\n\u5173\u95ed\u540e\u53ef\u4ee5\u901a\u8fc7\u70b9\u51fb\u6807\u7b7e\u680f\u201cUBT\u811a\u672c\u68c0\u6d4b\u201d\u518d\u6b21\u6253\u5f00\uff01") && (this.hide(),
+                this.sidebar.style.display = "none")
+        },
         this.getFormObject =  function (argForm)
         {
             var formObj = {};
@@ -74,7 +109,7 @@
             }
             return formValue;
         };
-        this.initTool = function (){
+        this.initEvent = function (){
             var formToolsElement = document.createElement("li");
             formToolsElement.onclick = function (){
                 var forms = document.getElementsByTagName("form");
@@ -83,12 +118,14 @@
                 }
             }
             formToolsElement.innerHTML = "得到表单内容";
-            jsTools.appendChild(formToolsElement);
         };
+        this.initTool = function (){
+            _that._createToolbar();
+
+        }
 
     };
     var pageContextTools= new MaskTool();
-    pageContextTools.show();
     pageContextTools.initTool();
     window.pageContextTools = pageContextTools;
 
