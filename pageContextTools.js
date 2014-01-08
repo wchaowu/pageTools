@@ -1,3 +1,8 @@
+/**
+ * Created by cwwu on 14-1-7.
+ */
+
+
 (function () {
     var divMask = '<div  id="_mask" ' +
         'style="display: none;  position: absolute;   top: 0;  left: 0;  width: 100%;  background-color: black;  z-index:101;  -moz-opacity: 0.2;  opacity:.20;  filter: alpha(opacity=20);"' +
@@ -5,8 +10,10 @@
         '<div id="_loadFrom" style="z-index: 1000;  display: none; color:Black; background-color:White;position: absolute;height:60px; left: 40%; top: 40%; width:340px; height: auto;">' +
         '<div id="_loadImg">' +
         '<div style=" font-size:14px;margin:20px 0 10px 10px;float:left; width:260px;"><h3>>系统工具</h3><br /><ul  id="_jsTools"><li>关于我们</li></ul>' +
-        '</div> </div></div>';
-    document.write(divMask);
+        '</div> </div></div>';		
+		document.open();
+        document.write(divMask);
+	    document.close()
     var MaskTool = function () {
         var maskObj = document.getElementById("_mask");
         var loadFrom = document.getElementById("_loadFrom");
