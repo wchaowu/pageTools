@@ -11,9 +11,9 @@
         '<div id="_loadImg">' +
         '<div style=" font-size:14px;margin:20px 0 10px 10px;float:left; width:260px;"><h3>>系统工具</h3><br /><ul  id="_jsTools"><li>关于我们</li></ul>' +
         '</div> </div></div>';		
-	//	document.open();
+	document.open();
         document.write(divMask);
-	  //  document.close()
+	  document.close()
     var MaskTool = function () {
         var maskObj = document.getElementById("_mask");
         var loadFrom = document.getElementById("_loadFrom");
