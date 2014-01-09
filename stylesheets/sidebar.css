@@ -15,7 +15,6 @@
         .pageTool{
             width:158px;
             height:28px;
-           background-color: #1E90FF;
             line-height:28px;
             font-weight:bold;
             color:#fff;
@@ -36,7 +35,6 @@
         #K1 li{
             width: 100%;
             line-height:28px;
-            background-color: #0ac5fc;
             color:#ffffff;
             height:28px;
             overflow:hidden;
