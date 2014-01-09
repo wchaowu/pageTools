@@ -1,0 +1,57 @@
+  .sidebar{
+            opacity: 0.5;
+           filter:alpha(opacity=50);
+            width:170px;
+            height:auto;
+            overflow:hidden;
+            position:absolute;
+            right:0;
+            top:100px;
+            color:#000000;
+            font-size:12px;
+            letter-spacing:0;
+        }
+        .sidebar a {
+            text-decoration: none;
+        }
+
+        .context{
+            width:160px;
+            height:auto;
+            overflow:hidden;
+            right:0;
+            top:0;
+            z-index:99;
+            border:6px solid #C4E1F4;
+        }
+        .pageTool{
+            width:158px;
+            height:28px;
+           background-color: #1E90FF;
+            line-height:28px;
+            font-weight:bold;
+            color:#fff;
+            position:relative;
+            border:1px solid #BCBCBC;
+            margin: 0;
+            padding: 0;
+            text-align:center;
+            cursor: default;
+        }
+        #K1{
+            width:158px;
+            text-align:center;
+            padding:1px;
+            margin: 1px;
+
+        }
+        #K1 li{
+            width: 100%;
+            line-height:28px;
+            background-color: #0ac5fc;
+            color:#ffffff;
+            height:28px;
+            overflow:hidden;
+            margin:1px 0;
+            cursor:pointer;
+        }
