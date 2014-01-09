@@ -124,16 +124,17 @@
                 _that.sidebar.style.display = "none")
         };
         this.formJsonValue = function (){
+            var html = "";
             var arrFormObj = h.getElementsByTagName("form");
             for(var i = 0;i<arrFormObj.length;i++){
+                html+="表单"+i+"<br />";
               var formValue=  _that.getFormObject(arrFormObj[i]);
-                var html = "";
                  for(var j = 0;j<formValue.length;j++){
                         html+=formValue[j]+"<br />";
                  }
-                _that.show(html);
 
             }
+            _that.show(html);
         }
         this.getFormObject =  function (argForm)
         {
