@@ -128,12 +128,9 @@
             for(var i = 0;i<arrFormObj.length;i++){
               var formValue=  _that.getFormObject(arrFormObj[i]);
                 var html = "";
-                if(formValue){
-                    for(var j = 0;j<formValue.length;j++){
+                 for(var j = 0;j<formValue.length;j++){
                         html+=formValue[j]+"<br />";
-                    }
-
-                }
+                 }
                 _that.show(html);
 
             }
